@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  		<meta charset="utf-8">
+		<title>Google Chart Tools</title>
+	</head>
+	<body>
+		<h1>GeoChart</h1>
+		<div id="graph">
+
+		</div>
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load('visualization', '1', {'packages':['geochart']});
+			google.setOnLoadCallback(drawChart);
+			function drawChart () {
+				var data = new google.visualization.DataTable();
+				var provinces = [
+					{id: 'BR-SP', population: 41589892},
+					{id: 'BR-ES', population: 3547013},
+					{id: 'BR-RS', population: 11247972},
+					{id: 'BR-BA', population: 15203934},
+					{id: 'BR-AM', population: 3938336},
+					{id: 'BR-CE', population: 8904459}
+				];
+	        	data.addColumn('string', 'Estado');
+	        	data.addColumn('number', 'População (hab)');
+	        	data.addRows(provinces.length);
+	        	provinces.forEach(function(province, index, array){
+	        		data.setValue(index, 0, province.id);
+	        		data.setValue(index, 1, province.population);
+	        	});
+	        	var elem = document.getElementById('graph');
+	      		var chart = new google.visualization.GeoChart(elem);
+	      		chart.draw(data, {region: 'BR', resolution: 'provinces'});
+			};
+      	</script>
+	</body>
+</html>

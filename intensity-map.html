@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  		<meta charset="utf-8">
+		<title>Google Chart Tools</title>
+	</head>
+	<body>
+		<h1>Intensity Map</h1>
+		<div id="graph">
+
+		</div>
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load('visualization', '1', {'packages':['intensitymap']});
+			google.setOnLoadCallback(drawChart);
+			function drawChart () {
+				var data = new google.visualization.DataTable();
+	        	data.addColumn('string', 'País');
+	        	data.addColumn('number', 'Área (1000 km²)');
+	        	data.addColumn('number', 'População (mil)');
+
+	        	data.addRows(3);
+
+	        	data.setValue(0, 0, 'BR');
+	        	data.setValue(0, 1, 8515);
+	        	data.setValue(0, 2, 190732);
+
+	        	data.setValue(1, 0, 'AR');
+	        	data.setValue(1, 1, 2766);
+	        	data.setValue(1, 2, 40091);
+
+	        	data.setValue(2, 0, 'CO');
+	        	data.setValue(2, 1, 1138);
+	        	data.setValue(2, 2, 45986);
+
+	        	var elem = document.getElementById('graph');
+	      		var chart = new google.visualization.IntensityMap(elem);
+	      		chart.draw(data, {region: 'south_america', height: 300, width: 400});
+			};
+      	</script>
+	</body>
+</html>

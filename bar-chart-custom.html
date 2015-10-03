@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  		<meta charset="utf-8">
+		<title>Google Chart Tools</title>
+	</head>
+	<body>
+		<h1>BarChart - Custom VAxis</h1>
+		<div id="graph">
+
+		</div>
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load('visualization', '1', {'packages':['corechart']});
+			google.setOnLoadCallback(drawChart);
+			function drawChart () {
+			    var dados = new google.visualization.DataTable();
+          dados.addColumn('string', 'Mês');
+          dados.addColumn('number', 'Defeitos');
+
+          dados.addRows(6);
+
+          dados.setValue(0, 0, 'Janeiro');
+          dados.setValue(0, 1, 50);
+        
+
+          dados.setValue(1, 0, 'Fevereiro');
+          dados.setValue(1, 1, 19);
+
+          dados.setValue(2, 0, 'Março');
+          dados.setValue(2, 1, 43);
+
+    
+
+          dados.setValue(3, 0, 'Abril');
+          dados.setValue(3, 1, 58);
+
+
+          dados.setValue(4, 0, 'Maio');
+          dados.setValue(4, 1, 44);
+
+
+          dados.setValue(5, 0, 'Junho');
+          dados.setValue(5, 1, 32);
+
+          var div = document.getElementById('graph');
+          var grafico = new google.visualization.BarChart(div);
+          var configuracoes = {
+            width: '100%',
+            title: 'Defeitos',
+            vAxis: {title: 'Defeitos'}
+          };
+          grafico.draw(dados, configuracoes);
+			};
+      	</script>
+	</body>
+</html>

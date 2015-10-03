@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  		<meta charset="utf-8">
+		<title>Google Chart Tools</title>
+	</head>
+	<body>
+		<h1>PieChart 3D</h1>
+		<div id="graph">
+
+		</div>
+		<div id="log"></div>
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load('visualization', '1', {'packages':['corechart']});
+			google.setOnLoadCallback(drawChart);
+			function drawChart () {
+				var data = new google.visualization.DataTable();
+	        	data.addColumn('string', 'Tipo');
+	        	data.addColumn('number', 'Valor');
+	        	data.addRows(4);
+
+	        	data.setValue(0, 0, 'Alimentação');
+	        	data.setValue(0, 1, 450);
+
+	        	data.setValue(1, 0, 'Educação');
+	        	data.setValue(1, 1, 2260);
+
+	        	data.setValue(2, 0, 'Transporte');
+	        	data.setValue(2, 1, 365);
+
+	        	data.setValue(3, 0, 'Shows');
+	        	data.setValue(3, 1, 180);
+
+	        	var elem = document.getElementById('graph');
+	      		var chart = new google.visualization.PieChart(elem);
+	      		chart.draw(data, {width: 700, height: 340, title: 'Meus Gastos', is3D: true});
+	      		google.visualization.events.addListener(chart, 'select', function(event){
+	      			var selecionados = chart.getSelection();
+                    var escolhido = selecionados[0].row;
+                    var tipoDeGasto = data.getFormattedValue(escolhido, 0);
+                    var valorGasto = data.getFormattedValue(escolhido, 1);
+                    document.getElementById('log').innerHTML = "Gasto em " + tipoDeGasto + ": R$" + valorGasto + "<br>";
+	      		});
+			};
+      	</script>
+	</body>
+</html>
